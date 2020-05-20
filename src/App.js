@@ -20,6 +20,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import PageNotFound from './pages/PageNotFound';
 import Footer from './layout/Footer';
+import Header from './layout/Header';
 import { UserContext } from './context/UserContext';
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
       <ToastContainer />
       {/* pass the state to context */}
       <UserContext.Provider value={{ user, setUser }}>
+        <Header />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/signin' component={Signin} />
