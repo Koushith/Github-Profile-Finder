@@ -12,18 +12,26 @@ import 'react-toastify/dist/ReactTostify.min.css';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+// Context
+import UserContext from './context/UserContext';
+
 // Components AKA Pages
 import Home from './Pages/Home';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import PageNotFound from './Pages/PageNotFound';
+import { ToastContainer } from 'react-toastify';
 
-function App() {
+const App = () => {
+  // state for user
+  const [user, setUser] = useState(null);
   return (
-    <div>
-      <h1>App Component</h1>
-    </div>
+    <Router>
+      <ToastContainer />
+      {/* pass the sate as provider. i.e context provider */}
+      <UserContext.Provider value={{ user, setUser }}></UserContext.Provider>
+    </Router>
   );
-}
+};
 
 export default App;
