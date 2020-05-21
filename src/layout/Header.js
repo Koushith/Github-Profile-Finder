@@ -31,25 +31,36 @@ const Header = () => {
           GitHub Profile Fetcher
         </Link>
       </NavbarBrand>
+      {/* conditional rendering- show email only if user is avaliable, else hide */}
+      <NavbarText className='text-white'>
+        {context.user?.email ? context.user.email : ''}
+      </NavbarText>
+
       {/* onclick and collapse- bootstrap docs */}
       <NavbarToggler onClick={toggle} />
       <Collapse navbar isOpen={isOpen}>
         <Nav className='ml-auto' navbar>
-          <NavItem>
-            <NavLink className='text-white' tag={Link} to='/signup'>
-              Signup
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className='text-white' tag={Link} to='/signin'>
-              Signin
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className='text-white' tag={Link} to='/'>
-              Logout
-            </NavLink>
-          </NavItem>
+          {/* if user is present show logout andhide others- vice versa */}
+          {context.user ? (
+            <NavItem>
+              <NavLink className='text-white' tag={Link} to='/'>
+                Logout
+              </NavLink>
+            </NavItem>
+          ) : (
+            <>
+              <NavItem>
+                <NavLink className='text-white' tag={Link} to='/signup'>
+                  Signup
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className='text-white' tag={Link} to='/signin'>
+                  Signin
+                </NavLink>
+              </NavItem>
+            </>
+          )}
         </Nav>
       </Collapse>
     </Navbar>
