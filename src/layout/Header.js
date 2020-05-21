@@ -43,7 +43,12 @@ const Header = () => {
           {/* if user is present show logout andhide others- vice versa */}
           {context.user ? (
             <NavItem>
-              <NavLink className='text-white' tag={Link} to='/'>
+              <NavLink
+                className='text-white'
+                onClick={() => {
+                  context.setUser(null);
+                }}
+              >
                 Logout
               </NavLink>
             </NavItem>
