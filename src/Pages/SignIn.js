@@ -22,18 +22,16 @@ import { toast } from 'react-toastify';
 const Signup = () => {
   const context = useContext(UserContext);
 
-  // state to manage email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // handel sihnup- refer firebase docs
-  const handelSignUp = () => {
+  const handleSignUp = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         console.log(res);
-        context.setUser({ email: res.user.email, uuid: res.user.uuid });
+        context.setUser({ email: res.user.email, uid: res.user.uid });
       })
       .catch((error) => {
         console.log(error);
@@ -41,19 +39,14 @@ const Signup = () => {
           type: 'error',
         });
       });
-    //email and password coming from state
   };
 
-  // formsubmit
-
-  const handelSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    handelSignUp();
+    handleSignUp();
   };
 
-  // if user is existing he will get unique id-
-
-  if (context.user?.uuid) {
+  if (context.user?.uid) {
     return <Redirect to='/' />;
   }
   return (
@@ -61,8 +54,8 @@ const Signup = () => {
       <Row>
         <Col lg={6} className='offset-lg-3 mt-5'>
           <Card>
-            <Form onSubmit={handelSubmit}>
-              <CardHeader className=''>Sign Up here</CardHeader>
+            <Form onSubmit={handleSubmit}>
+              <CardHeader className=''>Signin here</CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for='email' sm={3}>
@@ -97,7 +90,7 @@ const Signup = () => {
               </CardBody>
               <CardFooter>
                 <Button type='submit' block color='primary'>
-                  Sign Up
+                  Sign In
                 </Button>
               </CardFooter>
             </Form>
