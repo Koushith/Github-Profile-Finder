@@ -26,6 +26,7 @@ import { UserContext } from './context/UserContext';
 import firebaseConfig from './config/firebaseConfig';
 // Init Firebase
 firebase.initializeApp(firebaseConfig);
+
 const App = () => {
   // setstate
   const [user, setUser] = useState(null);
